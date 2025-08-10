@@ -1,8 +1,10 @@
-const Tag =require("../models/tags");
+const Category =require("../models/Category");
+
+// replace all tags with category
 
 //create tag ka handeller function
 
-exports.createTag =async (req,res) =>{
+exports.createCategory =async (req,res) =>{
     try{
 
         //fetch data
@@ -11,15 +13,15 @@ exports.createTag =async (req,res) =>{
         if(!name || !description){
             return res.status(400).json({
                 success:false,
-                message:"Al fields are required",
+                message:"All fields are required",
             });
         }
         //create entry in db
-        const tagDetails =await Tag.create({
+        const CategoryDetails =await Category.create({
             name:name,
             description:description,
         });
-        console.log(tagDetails);
+        console.log(CategoryDetails);
         //return response
 
         return res.status(200).json({
@@ -37,13 +39,13 @@ exports.createTag =async (req,res) =>{
 };
 
 //getAll tags handler function
-exports.showAlltags =async (req,res) =>{
+exports.showAllCategory =async (req,res) =>{
     try{
-           const allTags =await Tag.find({},  {name:true,description:true});
+           const allCategory =await Category.find({},  {name:true,description:true});
            res.status(200).json({
             success:true,
             message:"all tags returned successfully",
-            allTags, 
+            allCategory, 
            })
     }
     catch(error){

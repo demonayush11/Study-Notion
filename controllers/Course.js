@@ -1,5 +1,5 @@
 const Course =require("../models/Course");
-const Tag=require("../models/tags");
+const Category=require("../models/Category");
 const User =require("../models/User");
 const {uploadImageToCloudinary} =require("../utils/imageUploader");
  
@@ -8,13 +8,13 @@ exports.createCourse =async (req,res) =>{
     try{
 
         //fetch dataconst 
-        const {courseName,courseDescription,whatYouwillLearn,price,tag} =req.body;
+        const {courseName,courseDescription,whatYouwillLearn,price,category} =req.body;
 
         //get thumbnail
         const thumbnail =req.files.thumbnailImage;
 
         //validation
-        if(!courseName || !courseDescription || !whatYouwillLearn  || !price  || !tag  || !thumbnail){
+        if(!courseName || !courseDescription || !whatYouwillLearn  || !price  || !category  || !thumbnail){
           return res.status(400).json({
             success:false,
             message:'All fields are required',
@@ -31,7 +31,7 @@ exports.createCourse =async (req,res) =>{
             });
         }
         //check for tag
-        const tagDetails =await Tag.findById(tag);
+        const categoryDetails =await Category.findById(category);
         if(!tagDetails){
             return res.status(404).json({
                 success:false,
