@@ -32,10 +32,10 @@ exports.createCourse =async (req,res) =>{
         }
         //check for tag
         const categoryDetails =await Category.findById(category);
-        if(!tagDetails){
+        if(!categoryDetails){
             return res.status(404).json({
                 success:false,
-                message:'tag Details not found'
+                message:'category Details not found'
             });
         }
         //upload image to thumbnail
@@ -48,7 +48,7 @@ exports.createCourse =async (req,res) =>{
             instructor:instructorDetails._id,
             whatYouWillLearn:whatYouwillLearn,
             price,
-            tag:tagDetails._id,
+            category:categoryDetails._id,
             thumbnail:thumbnailImage.secure_url, 
         });
 
@@ -87,7 +87,8 @@ exports.createCourse =async (req,res) =>{
 exports.showAllCourse=async (req,res)=>{
     try{
 
-        const allCourse= await Course.find({},{coursename:true,
+        const allCourse= await Course.find({},{
+            courseName:true,
             price:true,
             thumbnail:true,
             instructor:true,
