@@ -7,8 +7,8 @@ const {courseEnrollmentEmail} =require("../mail/templates/courseEnrollmentEmail"
 const mongoose =require("mongoose");
 
 //capture thepayment and initiate the razorpay option
-exports.capturepayment =async (req,res) =>{
-  try{
+exports.capturePayment =async (req,res) =>{
+
         //get courseId andUserId
     const {course_id} =req.body;
     const userId=req.user.id;
@@ -84,9 +84,10 @@ exports.capturepayment =async (req,res) =>{
          message:"could not initiate the order"
        })
     } 
+}
 
     //verify signature of razorpay and server
-    exports.verifySignature =async(req,res) =>{
+exports.verifySignature =async(req,res) =>{
          const webhookSecret ="12345678";
 
          const signature =req.headers["x-razorpay-signature"];
@@ -153,8 +154,4 @@ exports.capturepayment =async (req,res) =>{
             })
         }
     };
-  }
-  catch(error){
-
-  }
-}
+  
