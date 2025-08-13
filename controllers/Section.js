@@ -1,10 +1,10 @@
 const Section=require("../models/Section");
 const Course=require("../models/Course");
 
-exports.createSection =async (requestAnimationFrame,res) =>{
+exports.createSection =async (req,res) =>{
     try{
         //data fetch
-        const {sectionName, courseId} =requestAnimationFrame.body;
+        const {sectionName, courseId} =req.body;
         //data validation
         if(!sectionName || !courseId){
             return res.status(400).json({
@@ -76,7 +76,7 @@ exports.updateSection =async (req,res) =>{
     }
 };
 
-exports.updateSection =async (req,res) =>{
+exports.deleteSection =async (req,res) =>{
     try{
        //get Id-asuming that we are sending Id in params
        const {sectionId} =req.params;
