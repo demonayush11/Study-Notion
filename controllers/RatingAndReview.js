@@ -3,7 +3,7 @@ const Course =require("../models/Course");
 const mongoose=require("mongoose");
 
 //createRating
-exports.createrating =async(req,res) =>{
+exports.createRating =async(req,res) =>{
     try{
         //get user id
         const userId =req.user.id;
